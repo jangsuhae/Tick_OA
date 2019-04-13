@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 使用对应的Dao层的接口 -->
+<mapper namespace="com.qianfeng.dao.UserDao">
+
+	<select id="findPwdByName" parameterType="string" resultType="string">
+		select password from t_user where no=#{uno}
+	</select>
+
+	<select id="findRoleByName" parameterType="string" resultType="string">
+		/*这里是通过no登陆的所以查询的应该是no 下面的权限同理*/
+		SELECT tr.`name` from t_user tu INNER JOIN
+		t_userrole tur ON tu.id = tur.uid INNER JOIN
+		t_role tr ON tur.rid = tr.id where tu.`no` = #{uno}
+	</select>
+
+	<select id="findPermisionByName" parameterType="string" resultType="string">
+	SELECT  distinct ta.title from t_user tu INNER JOIN
+t_userrole tur on tu.id = tur.uid INNER JOIN
+t_role tr ON tur.rid = tr.id INNER JOIN
+t_roleauthority tra ON tr.id = tra.rid INNER JOIN
+t_authority ta on tra.aid = ta.id where tu.`no` = '#{uno}
+	</select>
+	
+</mapper>
+
+
+
+

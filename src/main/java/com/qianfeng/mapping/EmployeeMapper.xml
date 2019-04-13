@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 命名空间
+	整个项目中，命名空间要唯一
+ -->
+<mapper namespace="com.qianfeng.dao.EmployeeDao">
+
+	
+	<select id="findAll" resultType= "employee">
+		select * from employee
+	</select>
+	
+	<select id="add" resultType= "employee">
+		insert into employee values(null,#{name},#{age},#{sex},#{phone})
+	</select>
+	<select id="deleteById" parameterType= "int">
+		delete from employee  where id = #{id}
+	</select>
+	<select id="findById" parameterType= "int" resultType= "employee">
+		select * from employee where id = #{id}
+	</select>
+	<select id="update" parameterType= "employee" >
+		update employee set name = #{name},age= #{age},sex=#{sex},phone = #{phone} where id = #{id}
+	</select>
+	<select id="findByName" parameterType="string" resultType="employee">
+	
+		select * from employee where name = #{name}
+		</select>
+	
+	
+	
+</mapper>
